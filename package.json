@@ -17,7 +17,9 @@
   },
   "homepage": "https://github.com/raj-rathod/Door-Security-Api#readme",
   "dependencies": {
+    "body-parser": "^1.20.0",
     "express": "^4.17.3",
-    "mongoose": "^6.2.10"
+    "mongoose": "^6.2.10",
+    "multer": "^1.4.4"
   }
 }
