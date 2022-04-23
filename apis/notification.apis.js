@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const fileUpload = require('../controller/file.upload');
 
 const notification = require('../controller/notification.controller')
 
@@ -20,7 +21,7 @@ router.patch('/', notification.notificationUpdate)
 router.delete('/', notification.notificationDelete)
 
 // create notification
-router.post('/', notification.notificationCreate)
+router.post('/', fileUpload.upload.single('image'), notification.notificationCreate)
 
   
 module.exports = router

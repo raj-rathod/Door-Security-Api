@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+const Schema = require('mongoose').Schema
   
 var user = new mongoose.Schema({
     id: Schema.ObjectId,
@@ -7,10 +8,7 @@ var user = new mongoose.Schema({
     phone: String,
     email: String,
     address: String,
-    image:
-    {
-        data: Buffer,
-    },
+    image: String
 });
     
-module.exports = new mongoose.model('user', user);
+module.exports = new mongoose.model('Users', user);
