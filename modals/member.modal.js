@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+const Schema = require('mongoose').Schema
   
 var  member = new mongoose.Schema({
     id: Schema.ObjectId,
@@ -6,8 +7,6 @@ var  member = new mongoose.Schema({
     name: String,
     relation: String,
     permissions: Boolean,
-    image: {
-        data: Buffer,
-    }
+    image: String,
 });
 module.exports = new mongoose.model('member', member);
