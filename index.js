@@ -1,43 +1,26 @@
 const express = require("express");
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose')
-var fs = require('fs');
-var path = require('path');
+require('dotenv/config');
 
-const uri = require('./db_connection_url');
-const user = require('./apis');
+const user = require('./apis/user');
+
+const dbConnection = require('./db-connection');
 
 const app = express();
 
+dbConnection.connection();
+
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 app.use(express.json());
 
 app.use((err, req, res, next) => {
-  console.error(err.stack)
-  res.status(500).send('Something broke!')
+  res.status(500).send('Something went wrong')
 })
 
-app.get('/user', user.getUser);
-app.post('/user', user.createUser);
+app.use('/user', user);
 
-mongoose.connect(uri.url
-  , 
-  {
-    useNewUrlParser: true, 
-    useUnifiedTopology: true     
-  }
-);
-
-const db = mongoose.connection;
-    db.on("error", console.error.bind(console, "connection error: "));
-    db.once("open", function () {
-    console.log("Connected successfully");
-});
-
-const port = 3000
-
-app.listen(port, () => {
-  console.log(`App listening on port ${port}`);
+app.listen(process.env.PORT, () => {
+  console.log(`App listening on port ${process.env.PORT}`);
 })
