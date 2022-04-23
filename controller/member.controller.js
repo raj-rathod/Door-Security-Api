@@ -1,5 +1,6 @@
 const memberModal = require('../modals/member.modal');
 const path = require('path');
+const fs = require('fs');
 
 const memberCreate = (req, res) => {
     const memberObj = {
@@ -36,13 +37,29 @@ const memberPermissionUpdate = (req, res) => {
 }
 
 const memberDelete = (req, res) => {
-    memberModal.deleteOne({_id: req.query.id}, (err, data)=>{
-      if(err){
-          res.status(500).send('Something went wrong');
-      }else{
-          res.status(200).send(data);
-      }
+    let imagepath = '';
+    memberModal.findOne({_id: req.query.id}, (err, data)=>{
+        if(err){
+            res.status(500).send('Something went wrong');
+        }else{
+            imagePath = data?.image;
+            memberModal.deleteOne({_id: req.query.id}, (err, data)=>{
+                if(err){
+                    res.status(500).send('Something went wrong');
+                }else{
+                    deleteUploadFile(imagePath);
+                    res.status(200).send(data);
+                }
+            });
+        }
     });
+   
+}
+
+const deleteUploadFile = (filePath) =>{
+    if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath)
+    }
 }
 
 module.exports = { 

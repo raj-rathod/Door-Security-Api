@@ -10,4 +10,4 @@ var  notification = new mongoose.Schema({
     yourAction: Boolean,
     isReaded: Boolean
 });
-module.exports = new mongoose.model('member', member);
+module.exports = new mongoose.model('notifications', notification);
