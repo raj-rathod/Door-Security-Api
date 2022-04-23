@@ -42,7 +42,7 @@ const memberDelete = (req, res) => {
         if(err){
             res.status(500).send('Something went wrong');
         }else{
-            imagePath = data?.image;
+            imagePath = data?.image; 
             memberModal.deleteOne({_id: req.query.id}, (err, data)=>{
                 if(err){
                     res.status(500).send('Something went wrong');
