@@ -2,7 +2,9 @@ const express = require("express");
 var bodyParser = require('body-parser');
 require('dotenv/config');
 
-const user = require('./apis/user');
+const user = require('./apis/user.apis');
+const member = require('./apis/member.apis');
+const notification = require('./apis/notification.apis'); 
 
 const dbConnection = require('./db-connection');
 
@@ -20,6 +22,8 @@ app.use((err, req, res, next) => {
 })
 
 app.use('/user', user);
+app.use('/member', member);
+app.use('/notification', notification);
 
 app.listen(process.env.PORT, () => {
   console.log(`App listening on port ${process.env.PORT}`);
