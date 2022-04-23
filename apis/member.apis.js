@@ -1,4 +1,5 @@
 const express = require('express')
+const fileUpload = require('../controller/file.upload');
 const router = express.Router()
 
 const member = require('../controller/member.controller');
@@ -11,7 +12,7 @@ router.use((req, res, next) => {
 router.get('/', member.members)
 
 // create a member for user
-router.post('/', member.memberCreate)
+router.post('/', fileUpload.upload.single('image'), member.memberCreate)
 
 // member permission update
 router.patch('/', member.memberPermissionUpdate)

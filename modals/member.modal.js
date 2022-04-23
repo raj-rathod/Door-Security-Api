@@ -9,4 +9,4 @@ var  member = new mongoose.Schema({
     permissions: Boolean,
     image: String,
 });
-module.exports = new mongoose.model('member', member);
+module.exports = new mongoose.model('members', member);

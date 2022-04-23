@@ -1,17 +1,48 @@
+const memberModal = require('../modals/member.modal');
+const path = require('path');
+
 const memberCreate = (req, res) => {
-    res.send('member created');
+    const memberObj = {
+       userId: req.body.userId,
+       name: req.body.name,
+       relation: req.body.relation,
+       permissions: req.body.permission,
+       image: path.join(__dirname, '../uploads/'+ req.file.filename)
+    }
+    const member = new memberModal(memberObj);
+    member.save((err, data) => {
+        res.status(200).send(data);
+    })
 }
 
 const members = (req, res) => {
-    res.send(req.query.username)
+   memberModal.find({userId: req.query.userId}, (err, data)=>{
+       if(err){
+           res.status(500).send('Something went wrong');
+       }else{
+           res.status(200).send(data);
+       }
+   });
 }
 
 const memberPermissionUpdate = (req, res) => {
-    res.send('permissions update')
+    memberModal.findByIdAndUpdate(req.body.id, { permissions: req.body.permission}, (err, data) => {
+       if(err){
+           res.status(500).send('Something went wrong');
+       }else{
+           res.status(200).send(data);
+       }
+    });
 }
 
 const memberDelete = (req, res) => {
-    res.send('member deleted')
+    memberModal.deleteOne({_id: req.query.id}, (err, data)=>{
+      if(err){
+          res.status(500).send('Something went wrong');
+      }else{
+          res.status(200).send(data);
+      }
+    });
 }
 
 module.exports = { 
