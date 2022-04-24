@@ -1,5 +1,4 @@
 const memberModal = require('../modals/member.modal');
-const path = require('path');
 const fs = require('fs');
 
 const memberCreate = (req, res) => {
@@ -8,7 +7,7 @@ const memberCreate = (req, res) => {
        name: req.body.name,
        relation: req.body.relation,
        permissions: req.body.permissions === 'true' ? true : false,
-       image: path.join(__dirname, '../uploads/'+ req.file.filename)
+       image: 'http://localhost:3000/images/' + req.file.filename,
     }
     const member = new memberModal(memberObj);
     member.save((err, data) => {

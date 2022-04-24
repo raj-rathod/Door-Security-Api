@@ -1,5 +1,4 @@
 const userModal = require('../modals/user.modal');
-const path = require('path');
 
 const userLogin = (req, res) => {
     userModal.findOne({email: req.query.username, password: req.query.password}).exec((err, data) => {
@@ -31,7 +30,7 @@ const userCreate = (req, res) =>{
         email: req.body.email,
         phone: req.body.phone,
         address: req.body.address,
-        image: path.join(__dirname, '../uploads/'+ req.file.filename),
+        image: 'http://localhost:3000/images/' + req.file.filename,
     };
     const user = new userModal(userObj);
     user.save((err, data) => {

@@ -27,6 +27,9 @@ app.use('/user', user);
 app.use('/member', member);
 app.use('/notification', notification);
 
+app.use(express.static('uploads')); 
+app.use('/images', express.static('uploads'));
+
 app.listen(process.env.PORT, () => {
   console.log(`App listening on port ${process.env.PORT}`);
 })

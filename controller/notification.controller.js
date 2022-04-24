@@ -1,12 +1,11 @@
 const notificationModal = require('../modals/notification.modal');
-const path = require('path');
 const fs = require('fs');
 
 const notificationCreate = (req, res) => {
     const notificationObj = {
       name: req.body.name,
       userId: req.body.userId,
-      image: path.join(__dirname, '../uploads/'+ req.file.filename),
+      image:'http://localhost:3000/images/' + req.file.filename,
       yourAction: req.body.yourAction,
       isReaded: req.body.isReaded,
       date: new Date()
