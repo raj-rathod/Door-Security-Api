@@ -29,7 +29,7 @@ const notifications = (req, res) => {
       }else{
           res.status(200).send(data);
       }
-    });
+    }).sort({date: -1});
 }
 
 const notificationDetail = (req, res) => {

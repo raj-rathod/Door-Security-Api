@@ -7,7 +7,7 @@ const memberCreate = (req, res) => {
        userId: req.body.userId,
        name: req.body.name,
        relation: req.body.relation,
-       permissions: req.body.permission,
+       permissions: req.body.permissions === 'true' ? true : false,
        image: path.join(__dirname, '../uploads/'+ req.file.filename)
     }
     const member = new memberModal(memberObj);
@@ -23,7 +23,7 @@ const members = (req, res) => {
        }else{
            res.status(200).send(data);
        }
-   });
+   }).sort({_id:-1});
 }
 
 const memberPermissionUpdate = (req, res) => {
