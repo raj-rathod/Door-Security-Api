@@ -9,6 +9,8 @@ router.use((req, res, next) => {
 })
 
 // define user for login
+router.get('/login', user.userLogin);
+
 router.get('/', user.user);
 
 // define user create

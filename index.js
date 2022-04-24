@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require('cors'); 
 var bodyParser = require('body-parser');
 require('dotenv/config');
 
@@ -16,6 +17,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 
 app.use(express.json());
+app.use(cors());
 
 app.use((err, req, res, next) => {
   res.status(500).send('Something went wrong')

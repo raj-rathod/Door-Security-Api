@@ -1,7 +1,7 @@
 const userModal = require('../modals/user.modal');
 const path = require('path');
 
-const user = (req, res) =>{
+const userLogin = (req, res) => {
     userModal.findOne({email: req.query.username, password: req.query.password}).exec((err, data) => {
        if(err){
            res.status(500).send("something went wrong");
@@ -13,6 +13,16 @@ const user = (req, res) =>{
            }
        }
     });
+}
+
+const user = (req, res) => {
+   userModal.findOne({_id: req.query.id}, (err, data) =>{
+      if(err){
+        res.status(500).send('Something went wrong');
+      }else{
+          res.status(200).send(data);
+      }
+   });
 }
 const userCreate = (req, res) =>{
     const userObj = {
@@ -29,4 +39,4 @@ const userCreate = (req, res) =>{
     })
 }
 
-module.exports = { user, userCreate };
+module.exports = { userLogin, user, userCreate };
